@@ -1,8 +1,7 @@
 from wfuzz.externals.moduleman.plugin import moduleman_plugin
 from wfuzz.plugin_api.base import BasePayload
 from wfuzz.exception import FuzzExceptPluginBadParams
-
-import random
+import secrets
 
 
 @moduleman_plugin
@@ -39,7 +38,7 @@ class hexrand(BasePayload):
         return self.__count
 
     def __next__(self):
-        self.current = random.SystemRandom().randint(self.minimum, self.maximum)
+        self.current = secrets.SystemRandom().SystemRandom().randint(self.minimum, self.maximum)
 
         lgth = len(hex(self.maximum).replace("0x", ""))
         pl = "%" + str(lgth) + "s"
