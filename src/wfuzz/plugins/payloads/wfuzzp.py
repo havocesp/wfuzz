@@ -1,4 +1,3 @@
-import pickle as pickle
 import gzip
 
 from wfuzz.externals.moduleman.plugin import moduleman_plugin
@@ -6,6 +5,7 @@ from wfuzz.exception import FuzzExceptBadFile
 from wfuzz.fuzzobjects import FuzzResult
 from wfuzz.plugin_api.base import BasePayload
 from wfuzz.utils import rgetattr
+import fickling
 
 
 @moduleman_plugin
@@ -52,7 +52,7 @@ class wfuzzp(BasePayload):
         try:
             with gzip.open(self.find_file(output_fn), 'r+b') as output:
                 while 1:
-                    item = pickle.load(output)
+                    item = fickling.load(output)
                     if not isinstance(item, FuzzResult):
                         raise FuzzExceptBadFile("Wrong wfuzz payload format, the object read is not a valid fuzz result.")
 
