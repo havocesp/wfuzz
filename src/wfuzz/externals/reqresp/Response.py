@@ -185,13 +185,13 @@ class Response:
         if self.header_equal("Transfer-Encoding", "chunked"):
             result = ""
             content = BytesIO(rawbody)
-            hexa = content.readline()
+            hexa = content.readline(5_000_000)
             nchunk = int(hexa.strip(), 16)
 
             while nchunk:
                 result += content.read(nchunk)
-                content.readline()
-                hexa = content.readline()
+                content.readline(5_000_000)
+                hexa = content.readline(5_000_000)
                 nchunk = int(hexa.strip(), 16)
 
             rawbody = result

@@ -59,7 +59,7 @@ class burplog(BasePayload):
 
             history = 'START'
 
-            rl = burp_file.readline()
+            rl = burp_file.readline(5_000_000)
             while rl != "":
                 if history == "START":
                     if rl == DELIMITER:
@@ -104,7 +104,7 @@ class burplog(BasePayload):
 
                         history = "START"
 
-                rl = burp_file.readline()
+                rl = burp_file.readline(5_000_000)
 
         except IOError as e:
             raise FuzzExceptBadFile("Error opening burp log file. %s" % str(e))
