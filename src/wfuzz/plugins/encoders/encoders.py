@@ -1,4 +1,5 @@
 from wfuzz.externals.moduleman.plugin import moduleman_plugin
+import secrets
 
 # Python 2 and 3
 try:
@@ -18,7 +19,6 @@ except ImportError:
 
 import re
 import binascii
-import random
 import hashlib
 import html
 
@@ -162,7 +162,7 @@ class random_upper:
     def encode(self, string):
         strt = ""
         for c in string:
-            x = int(random.uniform(0, 10))
+            x = int(secrets.SystemRandom().uniform(0, 10))
             x = x % 2
             if x == 1:
                 strt += c.upper()
